@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bike Log · Training toward the Triple</title>
+<style>
+:root{color-scheme:dark;--bg:#111918;--panel:#1b2825;--line:#394944;--ink:#f7f7ed;--muted:#bdcdc6;--green:#ceef8b;--warm:#f4c894}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+header,main,footer{width:min(1120px,calc(100% - 36px));margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:21px 0;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;letter-spacing:-.04em;font-size:1.35rem}.brand span{display:inline-block;width:12px;height:12px;margin-right:9px;border:3px solid var(--green);border-radius:50%}
+nav{display:flex;gap:5px;flex-wrap:wrap}button,select,input,textarea{font:inherit}button{cursor:pointer}button,select{border:1px solid var(--line);border-radius:9px;background:#263530;color:var(--ink);padding:9px 14px}button[aria-current=page],.primary{background:var(--green);color:#172412;border-color:var(--green);font-weight:750}button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid var(--warm);outline-offset:3px}
+main{padding:22px 0 30px}.hero,.panel{border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,30px);background:var(--panel);min-width:0}.hero{background:radial-gradient(ellipse at 95% 0%,#395745,transparent 68%),#21352d}
+h1,h2,h3,p{margin:0}h1{font-size:clamp(2.5rem,7vw,5rem);letter-spacing:-.07em;line-height:1.05;margin:.25rem 0 .5rem}h2{font-size:1.4rem;letter-spacing:-.035em}h3{font-size:1.07rem}.label{font-size:.875rem;text-transform:uppercase;letter-spacing:.09em;color:var(--green);font-weight:750}.muted,small{color:var(--muted)}small{font-size:.875rem}.hero-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:20px}.tag{color:var(--warm)}.milestone{border-left:3px solid var(--green);padding-left:14px;max-width:560px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.topline{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}.stats strong{display:block;font-size:clamp(1.35rem,4vw,2rem);letter-spacing:-.05em;line-height:1.15}.stats small{display:block;margin-top:5px}.space{margin-top:15px}.rule{border-top:1px solid var(--line);padding-top:14px}.bar{height:8px;background:#344640;border-radius:9px;overflow:hidden;margin:7px 0}.bar span{display:block;height:100%;background:var(--green);border-radius:9px}
+ol{padding-left:23px;margin-bottom:0}li{margin-bottom:10px;padding-left:3px}li::marker{color:var(--green)}details{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}summary{cursor:pointer;font-weight:700}details p{margin-top:8px}
+canvas{width:100%;height:210px;display:block}.wide{margin-top:16px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left}th,td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--green);white-space:nowrap}
+form{display:grid;gap:10px}label{display:grid;gap:5px}textarea,input{width:100%;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#14211e;padding:10px}textarea{resize:vertical}form button{justify-self:start}footer{color:var(--muted);padding:18px 0;border-top:1px solid var(--line)}a{color:var(--green)}[hidden]{display:none!important}
+@media(max-width:700px){.grid{grid-template-columns:1fr}header{align-items:flex-start}.hero-meta{margin-bottom:14px}nav button{padding:7px 9px}.stats{gap:6px}}
+</style>
+<header>
+  <div class="brand"><span aria-hidden="true"></span>Bike Log</div>
+  <nav aria-label="Bike Log"><button data-page="home" aria-current="page">Overview</button><button data-page="plan">Plan</button><button data-page="rides">Rides</button></nav>
+</header>
+<main>
+<section id="home" aria-label="Overview">
+  <article class="hero">
+    <p class="label">Where I’m going</p>
+    <h1>Triple Bypass</h1>
+    <div class="hero-meta"><span>July 10, 2027</span><span class="tag">Tentative goal</span><span class="muted">~120 mi · 10,800 ft climbing</span></div>
+    <div class="milestone"><h2>Lookout Mountain</h2><p>Climb steadily, finish with something left, and check how your knee feels the next morning.</p></div>
+  </article>
+  <div class="grid">
+    <article class="panel">
+      <p class="label">Where I’ve been</p><h2>Sample week</h2>
+      <div class="stats"><div><strong>1:15</strong><small>Saddle time (h:mm)</small></div><div><strong>16.20</strong><small>Outdoor miles</small></div><div><strong>—</strong><small>Elevation gain</small></div></div>
+      <div class="topline"><span>Weekly mileage</span><small>16.20 / 25 mi</small></div><div class="bar" role="progressbar" aria-label="Weekly mileage" aria-valuenow="16.20" aria-valuemax="25"><span style="width:64.8%"></span></div>
+      <div class="topline space"><span>Monthly mileage</span><small>16.20 / 100 mi</small></div><div class="bar" role="progressbar" aria-label="Monthly mileage" aria-valuenow="16.20" aria-valuemax="100"><span style="width:16.2%"></span></div>
+      <button class="space" data-go="rides">View Base ride</button>
+    </article>
+    <article class="panel">
+      <p class="label">How I get there</p><h2>Next workout</h2>
+      <h3 class="space">Trainer · 3 × 4 minutes hard</h3>
+      <p class="muted">4 minutes easy between reps. Warm up for 12–15 minutes and cool down for 8–10.</p>
+      <p class="rule space"><strong>Ride focus</strong><br>Finish the last effort as steadily as the first.</p>
+      <p class="muted space">Then an easy 35–45 minute spin and a 75–90 minute endurance ride.</p>
+      <button class="primary space" data-go="plan">Open training plan</button>
+    </article>
+  </div>
+  <article class="panel wide">
+    <h2>Weekly saddle time</h2>
+    <p class="muted">Indoor and outdoor sessions count toward time on the bike.</p>
+    <div class="topline space"><span>Sample week</span><span>75 min outdoor · 0 min indoor</span></div>
+    <div class="bar" aria-hidden="true"><span style="width:62.5%"></span></div>
+    <small>Scale: 0–120 minutes · 1 logged week</small>
+  </article>
+</section>
+<section id="plan" aria-label="Training plan" hidden>
+  <article class="panel">
+    <p class="label">How I get there</p><h1>Training plan</h1>
+    <p>One focused trainer session, one easy spin, and one longer ride. Adjust the week based on how you recover.</p>
+    <div class="table-wrap space"><table><thead><tr><th>Week</th><th>Quality session</th><th>Easy spin</th><th>Endurance</th></tr></thead><tbody>
+      <tr><td>1</td><td>3 × 4 min hard, 4 min easy between</td><td>35–45 min</td><td>75–90 min</td></tr>
+      <tr><td>2</td><td>Spinervals 7.0 or short 1-on/1-off intervals</td><td>35–45 min</td><td>90 min</td></tr>
+      <tr><td>3</td><td>4 × 4 min hard if week 1 went well</td><td>40–50 min</td><td>90–105 min</td></tr>
+      <tr><td>4</td><td>30–40 min easy</td><td>30–40 min</td><td>60–75 min</td></tr>
+    </tbody></table></div>
+  </article>
+  <div class="grid">
+    <article class="panel"><h2>January–June</h2>
+      <details open><summary>January · Build a repeatable week</summary><p>One quality day, an easy spin, and 75–120 minutes of weekend endurance.</p></details>
+      <details><summary>February · Get comfortable around two hours</summary><p>Use a familiar long Spinervals session for selected 1¾–2¼ hour rides.</p></details>
+      <details><summary>March · Ride outdoors and climb steadily</summary><p>Build toward 2–3 hours when conditions allow. Add one sustained climb.</p></details>
+      <details><summary>April · Practice repeat climbs</summary><p>Build toward 3–4 hours on selected weekends. Try two sustained climbs when ready.</p></details>
+      <details><summary>May · Practice climbing late in the ride</summary><p>Work toward 4–5 hours on selected hilly rides. Practice fueling and pace the final climb.</p></details>
+      <details><summary>June · Decide and rehearse</summary><p>Review actual rides in early June. If the build went well, use a 5–7 hour hilly rehearsal scaled to the rides you’ve tolerated, then shorten the long rides ahead of July 10.</p></details>
+    </article>
+    <article class="panel"><h2>Milestones</h2>
+      <ol><li>Build a repeatable riding week</li><li>Ride two hours comfortably</li><li>Establish a Lookout Mountain baseline</li><li>Climb late in a long ride</li><li>Make the June decision</li></ol>
+      <details open><summary>What to record on Lookout</summary><p>Use the same start and finish. Compare climb time, heart rate, effort, reserve at the top, and how the knee feels the next morning.</p></details>
+    </article>
+  </div>
+</section>
+<section id="rides" aria-label="Ride history" hidden>
+  <article class="panel">
+    <p class="label">Where I’ve been</p><h1>Ride history</h1>
+    <div class="topline"><h2>Sample Base ride</h2><span class="muted">Outdoor cycling</span></div>
+    <div class="stats"><div><strong>16.20 mi</strong><small>Distance</small></div><div><strong>1:15:00</strong><small>Workout time</small></div><div><strong>132 bpm</strong><small>Average HR</small></div></div>
+    <p class="muted">12.96 mph average · 152 bpm peak · 570 kcal · elevation gain unavailable</p>
+  </article>
+  <div class="grid">
+    <article class="panel"><h2>Heart rate</h2><p class="muted">Sample five-minute averages</p>
+      <canvas id="chart" role="img" aria-label="Example heart-rate trace in five-minute intervals."></canvas>
+      <details><summary>Read chart values</summary><div id="chartValues" class="space"></div></details>
+    </article>
+    <article class="panel"><h2>Ride reflection</h2>
+      <form id="reflection" class="space">
+        <label>Effort (1–10)<select name="effort"><option value="">Choose effort</option></select></label>
+        <label>Reserve at the finish<select name="reserve"><option value="">Choose reserve</option><option>Could keep going</option><option>About right</option><option>Spent</option></select></label>
+        <label>Next-morning knee check<select name="knee"><option value="">Choose response</option><option>Usual baseline</option><option>A little worse</option><option>Much worse</option></select></label>
+        <label>Notes<textarea name="notes" rows="3"></textarea></label>
+        <button class="primary" type="submit">Save reflection</button>
+        <small id="status" role="status">Sample reflections are saved only in this browser.</small>
+      </form>
+    </article>
+  </div>
+</section>
+</main>
+<footer>Sample data for the dashboard. Personal ride records are kept separately.</footer>
+<script>
+const averages = [106,112,116,124,129,127,132,137,141,135,142,145,139,146,144];
+const canvas = document.querySelector('#chart');
+const pages = ['home','plan','rides'];
+const storageKey = 'bike-log.reflection.sample-ride';
+function renderChart() {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (!width || !height) return;
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = width * ratio;
+  canvas.height = height * ratio;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(ratio, ratio);
+  const left = 40;
+  const right = width - 14;
+  const top = 16;
+  const bottom = height - 30;
+  const x = index => left + index * (right - left) / (averages.length - 1);
+  const y = bpm => bottom - (bpm - 95) * (bottom - top) / 55;
+  ctx.font = '12px system-ui';
+  ctx.fillStyle = '#bdcdc6';
+  for (const bpm of [100,110,120,130,140,150]) {
+    ctx.fillText(bpm, 3, y(bpm) + 4);
+    ctx.fillStyle = '#394944';
+    ctx.fillRect(left, y(bpm), right - left, 1);
+    ctx.fillStyle = '#bdcdc6';
+  }
+  for (const index of [0,4,8,14]) {
+    ctx.textAlign = index === 12 ? 'right' : 'left';
+    ctx.fillText(index * 5 + ' min', x(index), height - 8);
+  }
+  ctx.beginPath();
+  averages.forEach((bpm, index) => {
+    if (index === 0) ctx.moveTo(x(index), y(bpm));
+    else ctx.lineTo(x(index), y(bpm));
+  });
+  ctx.strokeStyle = '#ceef8b';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.fillStyle = '#ceef8b';
+  averages.forEach((bpm, index) => {
+    ctx.beginPath();
+    ctx.arc(x(index), y(bpm), 3, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+}
+function openPage(page) {
+  pages.forEach(id => { document.getElementById(id).hidden = id !== page; });
+  document.querySelectorAll('[data-page]').forEach(button => {
+    if (button.dataset.page === page) button.setAttribute('aria-current', 'page');
+    else button.removeAttribute('aria-current');
+  });
+  if (page === 'rides') renderChart();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('[data-page], [data-go]').forEach(button => {
+  button.addEventListener('click', () => openPage(button.dataset.page || button.dataset.go));
+});
+window.addEventListener('resize', renderChart);
+document.querySelector('#chartValues').textContent = averages.map((bpm, i) => (i*5) + '–' + (i*5+5) + ' min: ' + bpm + ' bpm').join(' · ');
+const form = document.querySelector('#reflection');
+const status = document.querySelector('#status');
+for (let effort = 1; effort <= 10; effort++) form.elements.effort.add(new Option(effort, effort));
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+  for (const key of ['effort','reserve','knee','notes']) form.elements[key].value = saved[key] || '';
+} catch {
+  status.textContent = 'Saved reflections are unavailable in this browser.';
+}
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(new FormData(form))));
+    status.textContent = 'Reflection saved in this browser.';
+  } catch {
+    status.textContent = 'This browser blocked local saving. Your entries are still on screen.';
+  }
+});
+</script>
+</html>
